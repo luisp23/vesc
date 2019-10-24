@@ -8,6 +8,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   vesc_msgs
   serial
+  nav_msgs
+  geometry_msgs
 )
 
 catkin_package(
@@ -31,10 +33,20 @@ add_executable(vesc_driver_node src/vesc_driver_node.cpp
                                 src/vesc_interface.cpp
                                 src/vesc_packet.cpp
                                 src/vesc_packet_factory.cpp)
+
+
 add_dependencies(vesc_driver_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(vesc_driver_node
   ${catkin_LIBRARIES}
 )
+
+# filter node 
+add_executable(vesc_filter src/vesc_filter.cpp)
+add_dependencies(vesc_filter ${catkin_EXPORTED_TARGETS})
+target_link_libraries(vesc_filter
+  ${catkin_LIBRARIES}
+)
+
 
 # nodelet library
 add_library(vesc_driver_nodelet src/vesc_driver_nodelet.cpp

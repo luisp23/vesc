@@ -1,0 +1,18 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+  <arg name="node_name" default="vesc_driver_node" />
+  <arg name="filter_size" default="50" />
+  <arg name="filter_rate" default="100" />
+  <arg name="publisher_rate" default="100" />
+  <arg name="max_vel" default="1.0" />
+
+  <!-- VESC fitler node -->
+  <node pkg="vesc_driver" type="vesc_filter" name="vesc" output="screen" >
+    <param name="filter_size" value="$(arg filter_size)" />
+    <param name="filter_rate" value="$(arg filter_rate)" />
+    <param name="publisher_rate" value="$(arg publisher_rate)" />
+    <param name="max_vel" value="$(arg max_vel)" />
+  </node>
+
+</launch>
