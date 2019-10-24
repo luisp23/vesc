@@ -9,6 +9,8 @@ float filter_rate;
 float publisher_rate; 
 float max_vel;
 float car_length;
+float lower_radius_threshold;
+float upper_radius_threshold;
 
 std::vector<float> linear_vel(50);
 std::vector<float> angular_vel(50);
@@ -57,11 +59,18 @@ void filterTimerCallback(const ros::TimerEvent& event){
 void publisherTimerCallback(const ros::TimerEvent& event){
     std_msgs::Float64 duty_cycle_msg;
     duty_cycle_msg.data = avg_linear_vel/max_vel;
-
+ 
     float radius = avg_linear_vel/avg_angular_vel;    // use the current velocity of the vehicle to estimate the desired turning radius from desired angular_vel
-    float angle = atan2(car_length,radius); 
+    float angle; 
     
-    std::cout << "Radius: " << radius << " Length: " << car_length << "Angle" << angle << std::endl;
+    if(abs(radius) >= lower_radius_threshold && abs(radius) <= upper_radius_threshold){
+        angle = atan2(car_length,radius); 
+    }else{
+        angle = 0.0; 
+    }
+
+    std::cout << "Linear velocity:   " << avg_linear_vel << " Angular Velocity:    " << avg_angular_vel << std::endl;
+    std::cout << "Radius:   " << radius << " Length:    " << car_length << "Angle:  " << angle << std::endl;
 
     std_msgs::Float64 steering_angle_msg;
     steering_angle_msg.data = angle;
@@ -79,6 +88,8 @@ int main(int argc, char** argv){
     private_nh.getParam("publisher_rate", publisher_rate);
     private_nh.getParam("max_vel", max_vel); 
     private_nh.getParam("car_length", car_length); 
+    private_nh.getParam("upper_radius_threshold", upper_radius_threshold);
+    private_nh.getParam("lower_radius_threshold", lower_radius_threshold);
 
     duty_cycle_pub = nh.advertise<std_msgs::Float64>("commands/motor/duty_cycle", 10);
     steering_angle_pub = nh.advertise<std_msgs::Float64>("commands/motor/position", 10);

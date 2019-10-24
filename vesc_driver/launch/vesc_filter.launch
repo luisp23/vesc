@@ -7,6 +7,8 @@
   <arg name="publisher_rate" default="100" />
   <arg name="max_vel" default="1.0" />
   <arg name="car_length" default="0.335" />
+  <arg name="lower_radius_threshold" default=".01" />
+  <arg name="upper_radius_threshold" default="1.1494" />
 
   <!-- VESC fitler node -->
   <node pkg="vesc_driver" type="vesc_filter" name="vesc" output="screen" >
