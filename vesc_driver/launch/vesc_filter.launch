@@ -6,6 +6,7 @@
   <arg name="filter_rate" default="100" />
   <arg name="publisher_rate" default="100" />
   <arg name="max_vel" default="1.0" />
+  <arg name="car_length" default="0.335" />
 
   <!-- VESC fitler node -->
   <node pkg="vesc_driver" type="vesc_filter" name="vesc" output="screen" >
@@ -13,6 +14,7 @@
     <param name="filter_rate" value="$(arg filter_rate)" />
     <param name="publisher_rate" value="$(arg publisher_rate)" />
     <param name="max_vel" value="$(arg max_vel)" />
+    <param name="car_length" value="$(arg car_length)" />
   </node>
 
 </launch>
