@@ -2,13 +2,12 @@
 <launch>
 
   <arg name="node_name" default="vesc_driver_node" />
-  <arg name="filter_size" default="50" />
+  <arg name="filter_size" default="25" />
   <arg name="filter_rate" default="100" />
   <arg name="publisher_rate" default="100" />
   <arg name="max_vel" default="1.0" />
-  <arg name="car_length" default="0.335" />
-  <arg name="lower_radius_threshold" default=".01" />
-  <arg name="upper_radius_threshold" default="1.1494" />
+  <arg name="duty_cycle_max" default="1.0" />
+  <arg name="duty_cycle_min" default="0.1" />
 
   <!-- VESC fitler node -->
   <node pkg="vesc_driver" type="vesc_filter" name="vesc" output="screen" >
@@ -16,7 +15,8 @@
     <param name="filter_rate" value="$(arg filter_rate)" />
     <param name="publisher_rate" value="$(arg publisher_rate)" />
     <param name="max_vel" value="$(arg max_vel)" />
-    <param name="car_length" value="$(arg car_length)" />
+    <param name="duty_cycle_max" value="$(arg duty_cycle_max)" />
+    <param name="duty_cycle_min" value="$(arg duty_cycle_min)" /> 
   </node>
 
 </launch>
