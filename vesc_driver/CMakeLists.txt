@@ -41,9 +41,11 @@ target_link_libraries(vesc_driver_node
 )
 
 # filter node 
-add_executable(vesc_filter src/vesc_filter.cpp)
-add_dependencies(vesc_filter ${catkin_EXPORTED_TARGETS})
-target_link_libraries(vesc_filter
+add_executable(vesc_filter_node src/vesc_filter_node.cpp
+                                src/vesc_filter)
+
+add_dependencies(vesc_filter_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(vesc_filter_node
   ${catkin_LIBRARIES}
 )
 

@@ -1,7 +1,6 @@
 <!-- -*- mode: XML -*- -->
 <launch>
 
-  <arg name="node_name" default="vesc_driver_node" />
   <arg name="filter_size" default="25" />
   <arg name="filter_rate" default="100" />
   <arg name="publisher_rate" default="100" />
@@ -9,14 +8,20 @@
   <arg name="duty_cycle_max" default="1.0" />
   <arg name="duty_cycle_min" default="0.1" />
 
+  <!-- Max steeering angle = steering_angle_max*M_PI -->
+  <arg name="steering_angle_max" default="0.25" />     
+  <arg name="steering_angle_min" default="0.1" />
+
   <!-- VESC fitler node -->
-  <node pkg="vesc_driver" type="vesc_filter" name="vesc" output="screen" >
+  <node pkg="vesc_driver" type="vesc_filter_node" name="vesc_filter_node" output="screen" >
     <param name="filter_size" value="$(arg filter_size)" />
     <param name="filter_rate" value="$(arg filter_rate)" />
     <param name="publisher_rate" value="$(arg publisher_rate)" />
     <param name="max_vel" value="$(arg max_vel)" />
     <param name="duty_cycle_max" value="$(arg duty_cycle_max)" />
     <param name="duty_cycle_min" value="$(arg duty_cycle_min)" /> 
+    <param name="steering_angle_max" value="$(arg steering_angle_max)" />
+    <param name="steering_angle_min" value="$(arg steering_angle_min)" /> 
   </node>
 
 </launch>
