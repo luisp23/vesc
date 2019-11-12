@@ -1,16 +1,16 @@
 <!-- -*- mode: XML -*- -->
 <launch>
 
-  <arg name="filter_size" default="25" />
-  <arg name="filter_rate" default="100" />
-  <arg name="publisher_rate" default="100" />
+  <arg name="filter_size" default="12" />
+  <arg name="filter_rate" default="50" />
+  <arg name="publisher_rate" default="50" />
   <arg name="max_vel" default="1.0" />
-  <arg name="duty_cycle_max" default="1.0" />
-  <arg name="duty_cycle_min" default="0.1" />
+  <arg name="duty_cycle_max" default="0.5" />
+  <arg name="duty_cycle_min" default="0.05" />
 
   <!-- Max steeering angle = steering_angle_max*M_PI -->
-  <arg name="steering_angle_max" default="0.25" />     
-  <arg name="steering_angle_min" default="0.1" />
+  <arg name="steering_angle_max" default="1.0" />     
+  <arg name="steering_angle_min" default="0.05" />
 
   <!-- VESC fitler node -->
   <node pkg="vesc_driver" type="vesc_filter_node" name="vesc_filter_node" output="screen" >

@@ -25,9 +25,7 @@ namespace vesc_filter{
 
 			geometry_msgs::Twist twist_input; 
 			std::vector<float> linear_vel;
-			std::vector<float> steering_angle;
 			float avg_linear_vel; 
-			float avg_steering_angle; 
 
 			ros::Publisher duty_cycle_pub;
 			ros::Publisher steering_angle_pub;
